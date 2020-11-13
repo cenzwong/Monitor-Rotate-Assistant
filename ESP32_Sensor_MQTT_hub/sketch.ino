@@ -1,10 +1,3 @@
-/*********
-  Rui Santos
-  Complete project details at https://randomnerdtutorials.com  
-  https://randomnerdtutorials.com/esp32-mqtt-publish-subscribe-arduino-ide/
-  https://github.com/knolleary/pubsubclient
-*********/
-
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include "DHT.h"
@@ -15,12 +8,12 @@ const int pinPhotoresistor = 35;
 DHT dht(pinDHT11_DATA, DHT11);
 
 // Replace the next variables with your SSID/Password combination
-const char* ssid = "---------";
-const char* password = "----------";
+const char* ssid = "--------";
+const char* password = "--------";
 
 // Add your MQTT Broker IP address, example:
 //const char* mqtt_server = "192.168.1.144";
-const char* mqtt_server = "192.168.0.211";
+const char* mqtt_server = "172.16.11.48";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -119,16 +112,24 @@ void loop() {
 
   long now = millis();
   // do that once five second
-  if (now - lastMsg > 10000) {
+  if (now - lastMsg > 1000) {
     lastMsg = now;
     
     // Temperature in Celsius
-    static float temperature = dht.readTemperature();
+    static float temperature;
     // Uncomment the next line to set temperature in Fahrenheit 
     // (and comment the previous temperature line)
-    static float humidity = dht.readHumidity();
-    static float light = analogRead(pinPhotoresistor);
-    
+    static float humidity;
+    static float light;
+    temperature = dht.readTemperature();
+    humidity = dht.readHumidity();
+    light = analogRead(pinPhotoresistor);
+    Serial.print("temperature: ");
+    Serial.println(temperature);
+    Serial.print("humidity ");
+    Serial.println(humidity);
+    Serial.print("light ");
+    Serial.println(light);
     // Convert the value to a char array
     char tempString[8];
     dtostrf(temperature, 1, 2, tempString);
