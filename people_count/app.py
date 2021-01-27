@@ -1,5 +1,6 @@
 # THis is the sample code of streaming to the Thingsboard
-# Download cenz_cv2 in Python Code book
+# Download cenz_cv2, cenz_thingsboard in Python Code book
+# Download MobileNetSSD_deploy.caffemodel, and prototxt
 
 
 from imutils.video import VideoStream
