@@ -1,7 +1,7 @@
 from enum import Enum
 import fitz
 
-def help(self):
+def help():
     helpText = """
     import SoFiHK
     CenzSoFi = SoFiHK.SoFiDReport("CenzSoFi.pdf")
