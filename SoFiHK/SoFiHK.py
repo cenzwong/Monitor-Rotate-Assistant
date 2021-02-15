@@ -1,6 +1,17 @@
 from enum import Enum
 import fitz
 
+def help(self):
+    helpText = """
+    import SoFiHK
+    CenzSoFi = SoFiHK.SoFiDReport("CenzSoFi.pdf")
+    CenzSoFi.ReadTable(SoFiHK.PdfTable.Table_Portfolio_Summary)
+    CenzSoFi.ReadTable(SoFiHK.PdfTable.Table_Daily_Trade)
+    CenzSoFi.ReadTable(SoFiHK.PdfTable.Table_Stock_Product_Position)
+    CenzSoFi.ReadTable(SoFiHK.PdfTable.Table_Stock_Product_Position)["QQQ"][SoFiHK.PosStock.Stock_CLOSING_PRICE.value]
+    """
+    print(helpText)
+
 class pdfTable(Enum):
     Table_Portfolio_Summary = 0
     Table_Daily_Trade = 1
@@ -51,16 +62,6 @@ class SoFiDReport:
                 text += page.getText()
             self._pdf = text
         self._get_code_list()
-    
-    def help(self):
-        helpText = """
-        import SoFiHK
-        CenzSoFi = SoFiHK.SoFiDReport("CenzSoFi.pdf")
-        CenzSoFi.ReadTable(SoFiHK.PdfTable.Table_Portfolio_Summary)
-        CenzSoFi.ReadTable(SoFiHK.PdfTable.Table_Daily_Trade)
-        CenzSoFi.ReadTable(SoFiHK.PdfTable.Table_Stock_Product_Position)
-        CenzSoFi.ReadTable(SoFiHK.PdfTable.Table_Stock_Product_Position)["QQQ"][SoFiHK.PosStock.Stock_CLOSING_PRICE.value]
-        """
 
     def _tripedPortfolioSummary(self):
         self._pdf.split("\n")
